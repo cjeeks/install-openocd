@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Installing build tools"
+INSTALL_TOOLS="build-essential libtool autoconf automake texinfo autotools-dev autoconf git"
+
+HIDAPI_DEPENDENCIES="libudev-dev libusb-1.0-0-dev libfox-1.6-dev"
+OPENOCD_DEPENDENCIES="libftdi-dev"
+
+echo "Installing build tools and dependencies"
 sudo apt-get update
-sudo apt-get install build-essential libtool autoconf automake texinfo autotools-dev autoconf git
-
-echo "Installing hidapi dependencies"
-sudo apt-get install libudev-dev libusb-1.0-0-dev libfox-1.6-dev
-
-echo "Installing openocd dependencies"
-sudo apt-get install libftdi-dev
+sudo apt-get install  $INSTALL_TOOLS $HIDAPI_DEPENDENCIES $OPENOCD_DEPENDENCIES
 
 echo "Creating temp folder"
 rm -rf ~/temp_build_files
