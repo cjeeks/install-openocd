@@ -3,11 +3,16 @@ set -e
 
 echo "Installing build tools"
 sudo apt-get update
-sudo apt-get install build-essential libtool autoconf automake texinfo autotools-dev autoconf
+sudo apt-get install build-essential libtool autoconf automake texinfo autotools-dev autoconf git
 
 echo "Installing hidapi dependencies"
 sudo apt-get install libudev-dev libusb-1.0-0-dev libfox-1.6-dev
 
+echo "Installing openocd dependencies"
+sudo apt-get install libftdi-dev
+
+echo "Creating temp folder"
+rm -rf ~/temp_build_files
 mkdir -p ~/temp_build_files
 cd ~/temp_build_files
 
@@ -20,9 +25,6 @@ cd hidapi
 make -j 4
 sudo make install
 cd ..
-
-echo "Installing openocd dependencies"
-sudo apt-get install libftdi-dev
 
 echo "Installing openocd"
 git clone https://git.code.sf.net/p/openocd/code openocd-code
